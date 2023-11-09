@@ -99,9 +99,9 @@
             android:layout_marginHorizontal="25dp"
             android:hint="Password"
             android:paddingHorizontal="20dp"
-            android:autofillHints="username"
+            android:autofillHints="Password"
             android:layout_marginTop="10dp"
-            android:inputType="text" />
+            android:inputType="textPassword" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login"
