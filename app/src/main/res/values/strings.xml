@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AS1_CityHunter</string>
+    <string name="please_sign_in_to_continue">Please sign in to continue</string>
+    <string name="txt_username">Username</string>
+    <string name="app_logo_description">App logo</string>
+    <string name="edt_username">Username</string>
+    <string name="let_s_go">Let\'s go</string>
+    <string name="app_video_description">app video</string>
+    <string name="sign_up">Sign Up</string>
+</resources>
