@@ -26,4 +26,5 @@
     <string name="menu_activity">Activity</string>
     <string name="menu_logout">Logout</string>
     <string name="app_version">Version 1.0.0</string>
+    <string name="submit_text">Submit</string>
 </resources>
