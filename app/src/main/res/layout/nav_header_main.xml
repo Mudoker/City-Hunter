@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:background="@color/black"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/user_profile_image"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@drawable/ava_boy"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintLeft_toRightOf="@id/user_profile_image"
+        app:layout_constraintTop_toTopOf="@id/user_profile_image"
+        app:layout_constraintBottom_toBottomOf="@id/user_profile_image">
+
+        <TextView
+            android:id="@+id/user_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mudoker"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/user_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lv.100"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/user_username"
+            app:layout_constraintLeft_toLeftOf="@id/user_username"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/app_version"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
