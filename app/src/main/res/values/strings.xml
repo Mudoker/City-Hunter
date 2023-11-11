@@ -7,4 +7,9 @@
     <string name="let_s_go">Let\'s go</string>
     <string name="app_video_description">app video</string>
     <string name="sign_up">Sign Up</string>
+    <string name="back_button">Back Button</string>
+    <string name="close">Close</string>
+    <string name="choose_an_avatar">Choose an avatar</string>
+    <string name="ava_male_des">logo male</string>
+    <string name="ava_female_des">Ava girl</string>
 </resources>

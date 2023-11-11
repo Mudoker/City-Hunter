@@ -10,6 +10,7 @@ public class User {
     private String username;
     private String password;
 
+    private String profileImage;
     private String fullName;
     private int age;
     private String gender;
@@ -86,6 +87,7 @@ public class User {
         return
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", profileImage='" + profileImage + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
@@ -198,6 +200,14 @@ public class User {
         isFirstTimeLogin = firstTimeLogin;
     }
 
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
     public static User fromString(String str) {
         String[] parts = str.split(", ");
         System.out.println(Arrays.toString(parts));
@@ -215,6 +225,9 @@ public class User {
                         break;
                     case "password":
                         user.setPassword(value.replace("'", ""));
+                        break;
+                    case "profileImage":
+                        user.setProfileImage(value.replace("'", ""));
                         break;
                     case "fullName":
                         user.setFullName(value.replace("'", ""));
