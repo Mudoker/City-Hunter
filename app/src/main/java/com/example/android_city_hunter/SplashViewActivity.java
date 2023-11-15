@@ -23,9 +23,9 @@ public class SplashViewActivity extends AppCompatActivity {
         Handler handler = new Handler(Looper.getMainLooper()); // Initialize Handler with the main Looper
 
         handler.postDelayed(() -> {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, AuthenticationView.class);
             startActivity(intent);
             finish();
-        }, 1000); // Delay in milliseconds (e.g., 3000ms for 3 seconds)
+        }, 1000);
     }
 }

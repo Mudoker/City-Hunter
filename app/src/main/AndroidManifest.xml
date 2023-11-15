@@ -16,8 +16,16 @@
             android:name=".MainActivity"
             android:theme="@style/Theme.Android_City_Hunter.NoActionBar"
             android:exported="false"/>
+<!--        <activity-->
+<!--            android:name=".RegistrationForm"-->
+<!--            android:theme="@style/Theme.Android_City_Hunter.NoActionBar"-->
+<!--            android:exported="false"/>-->
         <activity
-            android:name=".SplashViewActivity"
+            android:name=".AuthenticationView"
+            android:theme="@style/Theme.Android_City_Hunter.NoActionBar"
+            android:exported="false"/>
+        <activity
+            android:name=".RegistrationForm"
             android:exported="true"
             android:theme="@style/Theme.Android_City_Hunter.NoActionBar">
             <intent-filter>
