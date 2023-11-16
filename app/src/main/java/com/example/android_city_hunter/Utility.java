@@ -35,4 +35,12 @@ public class Utility {
         double bmr = calculateBMR(age, isMale, weightKg, heightCm);
         return bmr / 2000.0; // Use BMR as a factor
     }
+
+    public static double calculateBMI(double weightInKg, double heightInMeters) {
+        if (weightInKg <= 0 || heightInMeters <= 0) {
+            throw new IllegalArgumentException("Weight and height must be positive values");
+        }
+
+        return weightInKg / (heightInMeters * heightInMeters);
+    }
 }

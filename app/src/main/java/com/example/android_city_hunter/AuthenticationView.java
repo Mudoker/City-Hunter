@@ -104,7 +104,7 @@ public class AuthenticationView extends AppCompatActivity {
             return false;
         } else {
             User newUser = new User(username, password);
-            fileIOManipulator.save(newUser);
+            fileIOManipulator.save(newUser.getUsername(), newUser.toString());
             return true;
         }
     }

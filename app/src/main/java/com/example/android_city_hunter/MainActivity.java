@@ -1,60 +1,87 @@
 package com.example.android_city_hunter;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.Menu;
+import android.view.MenuItem;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.android_city_hunter.databinding.ActivityMainBinding;
+import com.example.android_city_hunter.fragment.ActivityFragment;
+import com.example.android_city_hunter.fragment.HomeFragment;
+import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding binding;
+    private DrawerLayout mDrawerLayout;
+    private static final int FRAGMENT_HOME = 0;
+    private static final int FRAGMENT_ACTIVITY = 1;
+    private static final int FRAGMENT_LOGOUT = 2;
+
+    private static int currentFragment = FRAGMENT_HOME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
-        setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setOpenableLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        mDrawerLayout.addDrawerListener(drawerToggle);
+
+        drawerToggle.syncState();
+
+        // Handle listening on view navigation
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        replaceFragment(new HomeFragment());
+        navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            if (currentFragment != FRAGMENT_HOME) {
+                replaceFragment(new HomeFragment());
+                currentFragment = FRAGMENT_HOME;
+                return true;
+            }
+        } else if (id == R.id.nav_activity) {
+            if (currentFragment != FRAGMENT_ACTIVITY) {
+                replaceFragment(new ActivityFragment());
+                currentFragment = FRAGMENT_ACTIVITY;
+                return true;
+            }
+        } else if (id == R.id.nav_logout) {
+            if (currentFragment != FRAGMENT_LOGOUT) {
+                replaceFragment(new HomeFragment());
+                currentFragment = FRAGMENT_LOGOUT;
+                return true;
+            }
+        }
+
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        return false;
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+    public void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment_content_main, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

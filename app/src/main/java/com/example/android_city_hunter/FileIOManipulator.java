@@ -37,11 +37,11 @@ public class FileIOManipulator {
     }
 
 
-    public void save(User user) {
-        final String FILE_NAME = user.getUsername() + ".txt";
+    public void save(String fileName, String content) {
+        final String FILE_NAME = fileName + ".txt";
 
         try (FileOutputStream fos = context.openFileOutput(FILE_NAME, MODE_PRIVATE)) {
-            fos.write(user.toString().getBytes());
+            fos.write(content.getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }

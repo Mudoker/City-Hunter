@@ -6,19 +6,14 @@ public class Badge {
     private String id;
     private Position badgeLocation;
     private double experiencePoints;
-    private String badgeTitle;
-    private String badgeDescription;
-    private String imageUrl;
-    private String category;
 
-    public Badge(Position badgeLocation, double experiencePoints, String badgeTitle, String badgeDescription, String imageUrl, String category) {
+    private String imageUrl;
+
+    public Badge(Double badgeLongitude, Double badeLatitude, double experiencePoints, String imageUrl) {
         this.id = UUID.randomUUID().toString();
-        this.badgeLocation = badgeLocation;
+        this.badgeLocation = new Position(badgeLongitude, badeLatitude);
         this.experiencePoints = experiencePoints;
-        this.badgeTitle = badgeTitle;
-        this.badgeDescription = badgeDescription;
         this.imageUrl = imageUrl;
-        this.category = category;
     }
 
     public String getId() {
@@ -45,22 +40,6 @@ public class Badge {
         this.experiencePoints = experiencePoints;
     }
 
-    public String getBadgeTitle() {
-        return badgeTitle;
-    }
-
-    public void setBadgeTitle(String badgeTitle) {
-        this.badgeTitle = badgeTitle;
-    }
-
-    public String getBadgeDescription() {
-        return badgeDescription;
-    }
-
-    public void setBadgeDescription(String badgeDescription) {
-        this.badgeDescription = badgeDescription;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -69,11 +48,4 @@ public class Badge {
         this.imageUrl = imageUrl;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 }

@@ -1,0 +1,98 @@
+[
+  {
+    "badgeLocation": {
+      "latitude": 10.772801362775109,
+      "longitude":  106.69796715111163
+    },
+    "experiencePoints": 50,
+    "imageUrl": "benthanh"
+  },
+  {
+    "badgeLocation": {
+      "latitude": 10.731205893838917,
+      "longitude": 106.69749387656198
+    },
+    "experiencePoints": 100,
+    "imageUrl": "rmit"
+  },
+  {
+    "badgeLocation": {
+      "latitude": 10.777920741282552,
+      "longitude": 106.6819608394725
+    },
+    "experiencePoints": 30,
+    "imageUrl": "congtruongdanchu"
+  },
+  {
+    "badgeLocation": {
+      "latitude": 10.771864458913885,
+      "longitude": 106.70434368210441
+    },
+    "experiencePoints": 80,
+    "imageUrl": "bitexco"
+  },
+  {
+    "badgeLocation": {
+      "latitude": 10.778712424351626,
+      "longitude": 106.64920636645606
+    },
+    "experiencePoints": 40,
+    "imageUrl": "giaclam"
+  },
+  {
+  "badgeLocation": {
+    "latitude": 10.777194441766415,
+    "longitude": 106.69552740085008
+  },
+  "experiencePoints": 120,
+  "imageUrl": "independancepalace"
+  },
+  {
+  "badgeLocation": {
+    "latitude": 10.777194441766415,
+    "longitude": 106.69552740085008
+  },
+  "experiencePoints": 120,
+  "imageUrl": "independancepalace"
+  },
+  {
+    "badgeLocation": {
+      "latitude": 10.779964660905268,
+      "longitude": 106.69913691248911
+    },
+    "experiencePoints": 100,
+    "imageUrl": "notredame"
+  },
+  {
+    "badgeLocation": {
+      "latitude": 10.784653073469686,
+      "longitude": 106.66485564163061
+    },
+    "experiencePoints": 10,
+    "imageUrl": "lethirieng"
+  },
+  {
+    "badgeLocation": {
+      "latitude": 10.795235585631543,
+      "longitude": 106.72176785111195
+    },
+    "experiencePoints": 110,
+    "imageUrl": "landmark81"
+  },
+  {
+    "badgeLocation": {
+      "latitude": 10.77081796549969,
+      "longitude": 106.66962227016126
+    },
+    "experiencePoints": 20,
+    "imageUrl": "vanhanhmall"
+  },
+  {
+    "badgeLocation": {
+      "latitude": 10.782341622949964,
+      "longitude": 106.68919703947267
+    },
+    "experiencePoints": 60,
+    "imageUrl": "studyhub"
+  }
+]
