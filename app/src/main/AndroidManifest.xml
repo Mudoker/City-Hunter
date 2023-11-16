@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_City_Hunter"
         tools:targetApi="31">
-<!--        <activity-->
-<!--            android:name=".MainActivity"-->
-<!--            android:theme="@style/Theme.Android_City_Hunter.NoActionBar"-->
-<!--            android:exported="false"/>-->
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.Android_City_Hunter.NoActionBar"
+            android:exported="false"/>
         <activity
             android:name=".RegistrationForm"
             android:theme="@style/Theme.Android_City_Hunter.NoActionBar"
@@ -25,7 +25,7 @@
             android:theme="@style/Theme.Android_City_Hunter.NoActionBar"
             android:exported="false"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashViewActivity"
             android:exported="true"
             android:theme="@style/Theme.Android_City_Hunter.NoActionBar">
             <intent-filter>

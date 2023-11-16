@@ -1,5 +1,6 @@
 package com.example.android_city_hunter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class User {
+    public static User CURRENT_USER = new User();
     private String username;
     private String password;
 
@@ -21,7 +23,7 @@ public class User {
     private double totalTodayDistanceInKilometers;
     private int totalTodaySteps;
     private double totalCaloriesBurned;
-    private Map<String, Date> badges = new HashMap<>(); // Using a Map to store badges and their unlock dates
+    private ArrayList<Integer> badges = new ArrayList<>();
     private int level; // User's level in the walking app
     private double experience; // User's experience points (exp)
 
@@ -101,7 +103,8 @@ public class User {
                 ", level=" + level +
                 ", experience=" + experience +
                 ", currentPosition=" + currentPosition +
-                ", isFirstTimeLogin=" + isFirstTimeLogin;
+                ", isFirstTimeLogin=" + isFirstTimeLogin +
+                ", badge=" + Arrays.toString(badges.toArray());
     }
 
     public void setHeightInCentimeters(double heightInCentimeters) {
@@ -156,12 +159,16 @@ public class User {
         this.totalCaloriesBurned = totalCaloriesBurned;
     }
 
-    public Map<String, Date> getBadges() {
+    public ArrayList<Integer> getBadges() {
         return badges;
     }
 
-    public void setBadges(Map<String, Date> badges) {
+    public void setBadges(ArrayList<Integer> badges) {
         this.badges = badges;
+    }
+
+    public void addBadges( int badge) {
+        this.badges.add(badge);
     }
 
     public void setCurrentPosition(Position currentPosition) {
@@ -210,7 +217,6 @@ public class User {
 
     public static User fromString(String str) {
         String[] parts = str.split(", ");
-        System.out.println(Arrays.toString(parts));
         User user = new User();
 
         for (String part : parts) {
@@ -282,6 +288,14 @@ public class User {
                         break;
                     case "isFirstTimeLogin":
                         user.setFirstTimeLogin(Boolean.parseBoolean(value));
+                        break;
+                    case "badges":
+                        ArrayList<Integer> restoredList = new ArrayList<>();
+                        String[] elements = value.substring(1, value.length() - 1).split(", ");
+
+                        for (String element : elements) {
+                            restoredList.add(Integer.parseInt(element));
+                        }
                         break;
                 }
             }

@@ -2,6 +2,7 @@ package com.example.android_city_hunter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,10 +62,20 @@ public class AuthenticationView extends AppCompatActivity {
             // Login
             if ("Login".contentEquals(txtLogin.getText())) {
                 Thread newThread = new Thread(() -> {
-                    User loginResult = processLogin(username, password);
+                    User.CURRENT_USER = processLogin(username, password);
                     runOnUiThread(() -> {
-                        if (loginResult != null) {
+                        if (User.CURRENT_USER != null) {
+                            Intent intent;
+                            if (User.CURRENT_USER.getFirstTimeLogin()) {
+                                intent = new Intent(this, RegistrationForm.class);
+                            } else {
+                                intent = new Intent(this, MainActivity.class);
+                            }
+
                             makeToast("Login Successfully ");
+
+                            startActivity(intent);
+                            finish();
                         } else {
                             makeToast("Login Failed");
                         }
@@ -72,16 +83,13 @@ public class AuthenticationView extends AppCompatActivity {
                 });
                 newThread.start();
             } else {
-                Thread newThread = new Thread(() -> {
-                    boolean loginResult = processSignUp(username, password);
-                    runOnUiThread(() -> {
-                        if (loginResult) {
-                            makeToast("Register Successfully");
-                        } else {
-                            makeToast("Register Failed");
-                        }
-                    });
-                });
+                Thread newThread = new Thread(() -> runOnUiThread(() -> {
+                    if (processSignUp(username, password)) {
+                        makeToast("Register Successfully");
+                    } else {
+                        makeToast("Register Failed");
+                    }
+                }));
                 newThread.start();
             }
         }

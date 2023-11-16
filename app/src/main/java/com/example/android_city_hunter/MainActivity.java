@@ -1,5 +1,6 @@
 package com.example.android_city_hunter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -16,6 +17,8 @@ import com.example.android_city_hunter.fragment.ActivityFragment;
 import com.example.android_city_hunter.fragment.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int FRAGMENT_LOGOUT = 2;
 
     private static int currentFragment = FRAGMENT_HOME;
+
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +52,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         replaceFragment(new HomeFragment());
+
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+
+        Bundle args = new Bundle();
+        args.putString("currentUser", currentUser.toString());
 
         if (id == R.id.nav_home) {
             if (currentFragment != FRAGMENT_HOME) {
@@ -68,8 +77,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } else if (id == R.id.nav_logout) {
             if (currentFragment != FRAGMENT_LOGOUT) {
-                replaceFragment(new HomeFragment());
-                currentFragment = FRAGMENT_LOGOUT;
+                Intent logoutIntent = new Intent(this, AuthenticationView.class);
+
+                startActivity(logoutIntent);
+
+                finish();
                 return true;
             }
         }

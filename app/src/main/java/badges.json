@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "badgeLocation": {
       "latitude": 10.772801362775109,
       "longitude":  106.69796715111163
@@ -8,6 +9,7 @@
     "imageUrl": "benthanh"
   },
   {
+    "id": 2,
     "badgeLocation": {
       "latitude": 10.731205893838917,
       "longitude": 106.69749387656198
@@ -16,6 +18,7 @@
     "imageUrl": "rmit"
   },
   {
+    "id": 3,
     "badgeLocation": {
       "latitude": 10.777920741282552,
       "longitude": 106.6819608394725
@@ -24,6 +27,7 @@
     "imageUrl": "congtruongdanchu"
   },
   {
+    "id": 4,
     "badgeLocation": {
       "latitude": 10.771864458913885,
       "longitude": 106.70434368210441
@@ -32,6 +36,7 @@
     "imageUrl": "bitexco"
   },
   {
+    "id": 5,
     "badgeLocation": {
       "latitude": 10.778712424351626,
       "longitude": 106.64920636645606
@@ -40,7 +45,8 @@
     "imageUrl": "giaclam"
   },
   {
-  "badgeLocation": {
+    "id": 6,
+    "badgeLocation": {
     "latitude": 10.777194441766415,
     "longitude": 106.69552740085008
   },
@@ -48,14 +54,7 @@
   "imageUrl": "independancepalace"
   },
   {
-  "badgeLocation": {
-    "latitude": 10.777194441766415,
-    "longitude": 106.69552740085008
-  },
-  "experiencePoints": 120,
-  "imageUrl": "independancepalace"
-  },
-  {
+    "id": 7,
     "badgeLocation": {
       "latitude": 10.779964660905268,
       "longitude": 106.69913691248911
@@ -64,6 +63,7 @@
     "imageUrl": "notredame"
   },
   {
+    "id": 8,
     "badgeLocation": {
       "latitude": 10.784653073469686,
       "longitude": 106.66485564163061
@@ -72,6 +72,7 @@
     "imageUrl": "lethirieng"
   },
   {
+    "id": 9,
     "badgeLocation": {
       "latitude": 10.795235585631543,
       "longitude": 106.72176785111195
@@ -80,6 +81,7 @@
     "imageUrl": "landmark81"
   },
   {
+    "id": 10,
     "badgeLocation": {
       "latitude": 10.77081796549969,
       "longitude": 106.66962227016126
@@ -88,6 +90,7 @@
     "imageUrl": "vanhanhmall"
   },
   {
+    "id": 11,
     "badgeLocation": {
       "latitude": 10.782341622949964,
       "longitude": 106.68919703947267

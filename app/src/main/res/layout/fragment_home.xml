@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/home_user_ava"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/ava_boy"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -73,7 +73,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/home_card_user_calories_burnt"
         android:layout_width="190dp"
-        android:layout_height="230dp"
+        android:layout_height="200dp"
         android:backgroundTint="@color/orange_burnt"
         app:cardCornerRadius="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -129,7 +129,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/home_card_step_counter"
         android:layout_width="170dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintLeft_toRightOf="@id/home_card_user_calories_burnt"
         app:layout_constraintTop_toTopOf="@id/home_card_user_calories_burnt"
@@ -173,7 +173,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/home_card_distance_counter"
         android:layout_width="170dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintLeft_toRightOf="@id/home_card_user_calories_burnt"
         app:layout_constraintTop_toBottomOf="@id/home_card_step_counter"
@@ -218,7 +218,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/home_card_bmi"
         android:layout_width="170dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintLeft_toRightOf="@id/home_card_user_calories_burnt"
         app:layout_constraintTop_toBottomOf="@id/home_card_distance_counter"
@@ -282,6 +282,7 @@
         android:scrollbars="none">
 
         <LinearLayout
+            android:id="@+id/home_achievement_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -289,34 +290,24 @@
             <androidx.constraintlayout.utils.widget.ImageFilterView
                 android:layout_width="170dp"
                 android:layout_height="170dp"
-                android:src="@drawable/benthanh"
+                android:src="@drawable/firsttime"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_txt_achievement" />
 
-            <!-- Add more ImageViews here -->
-
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:src="@drawable/benthanh"
-                app:layout_constraintLeft_toRightOf="@+id/previous_image_view"
-                app:layout_constraintTop_toBottomOf="@id/home_txt_achievement" />
-
-            <!-- Add more ImageViews here -->
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:src="@drawable/benthanh"
-                app:layout_constraintLeft_toRightOf="@+id/previous_image_view"
-                app:layout_constraintTop_toBottomOf="@id/home_txt_achievement" />
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:src="@drawable/benthanh"
-                app:layout_constraintLeft_toRightOf="@+id/previous_image_view"
-                app:layout_constraintTop_toBottomOf="@id/home_txt_achievement" />
         </LinearLayout>
     </HorizontalScrollView>
+
+   <TextView
+       android:id="@+id/home_txt_hub"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="What's more"
+       app:layout_constraintTop_toBottomOf="@id/home_scroll_view_achievement"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:textSize="30sp"
+       android:textStyle="bold"
+       android:textColor="@color/black"
+       android:layout_marginStart="20dp"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -327,7 +318,7 @@
         app:cardCornerRadius="10dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/light_blue"
-        app:layout_constraintTop_toBottomOf="@id/home_scroll_view_achievement">
+        app:layout_constraintTop_toBottomOf="@id/home_txt_hub">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -370,6 +361,7 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/home_card_must_try_route"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:clickable="true"

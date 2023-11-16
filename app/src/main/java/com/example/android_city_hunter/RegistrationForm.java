@@ -1,5 +1,6 @@
 package com.example.android_city_hunter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -12,7 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
+import com.example.android_city_hunter.fragment.HomeFragment;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RegistrationForm extends AppCompatActivity {
     private EditText edtFullName, edtWeight, edtHeight;
@@ -21,6 +25,8 @@ public class RegistrationForm extends AppCompatActivity {
     private CardView cardAvaMale;
     private CardView cardAvaFemale;
     private String profileImage = "ava_boy", gender = "Male";
+
+    private final FileIOManipulator fileIOManipulator = new FileIOManipulator(this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +98,21 @@ public class RegistrationForm extends AppCompatActivity {
                 } else if (weight < 30 || weight >= 500) {
                     makeToast("Weight should be between 30 and 499");
                 } else {
-                    makeToast(fullName + spnAge.getSelectedItem().toString() + profileImage + gender + heightStr + weightStr);
+                    User.CURRENT_USER.setLevel(0);
+                    User.CURRENT_USER.setProfileImage(profileImage);
+                    User.CURRENT_USER.setExperience(0);
+                    User.CURRENT_USER.setFullName(fullName);
+                    User.CURRENT_USER.setAge(Integer.parseInt(spnAge.getSelectedItem().toString()));
+                    User.CURRENT_USER.setGender(gender);
+                    User.CURRENT_USER.setHeightInCentimeters(height);
+                    User.CURRENT_USER.setWeightInKilograms(weight);
+                    User.CURRENT_USER.setFirstTimeLogin(false);
+
+                    fileIOManipulator.save(User.CURRENT_USER.getUsername(), User.CURRENT_USER.toString());
+                    Intent intent = new Intent(this, MainActivity.class);
+
+                    startActivity(intent);
+                    finish();
                 }
             } catch (NumberFormatException e) {
                 makeToast("Invalid numeric input for height or weight");
