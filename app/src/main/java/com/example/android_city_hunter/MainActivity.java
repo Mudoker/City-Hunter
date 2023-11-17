@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
@@ -28,7 +30,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private static int currentFragment = FRAGMENT_HOME;
 
-    User currentUser;
+    NavigationView navigationView;
+
+    ActivityResultLauncher<Intent> intentMaps = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result != null && result.getResultCode() == RESULT_OK) {
+            navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerToggle.syncState();
 
         // Handle listening on view navigation
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         replaceFragment(new HomeFragment());
@@ -60,9 +68,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        Bundle args = new Bundle();
-        args.putString("currentUser", currentUser.toString());
-
         if (id == R.id.nav_home) {
             if (currentFragment != FRAGMENT_HOME) {
                 replaceFragment(new HomeFragment());
@@ -71,7 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } else if (id == R.id.nav_activity) {
             if (currentFragment != FRAGMENT_ACTIVITY) {
-                replaceFragment(new ActivityFragment());
+                Intent mapsIntent = new Intent(this, MapsActivity.class);
+                intentMaps.launch(mapsIntent);
                 currentFragment = FRAGMENT_ACTIVITY;
                 return true;
             }

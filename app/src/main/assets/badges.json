@@ -1,15 +1,17 @@
 [
   {
     "id": 1,
+    "title": "Ben Thanh Market",
     "badgeLocation": {
       "latitude": 10.772801362775109,
-      "longitude":  106.69796715111163
+      "longitude": 106.69796715111163
     },
     "experiencePoints": 50,
     "imageUrl": "benthanh"
   },
   {
     "id": 2,
+    "title": "RMIT University",
     "badgeLocation": {
       "latitude": 10.731205893838917,
       "longitude": 106.69749387656198
@@ -19,6 +21,7 @@
   },
   {
     "id": 3,
+    "title": "Cong Truong Dan Chu Square",
     "badgeLocation": {
       "latitude": 10.777920741282552,
       "longitude": 106.6819608394725
@@ -28,6 +31,7 @@
   },
   {
     "id": 4,
+    "title": "Bitexco Financial Tower",
     "badgeLocation": {
       "latitude": 10.771864458913885,
       "longitude": 106.70434368210441
@@ -37,6 +41,7 @@
   },
   {
     "id": 5,
+    "title": "Gia Lam Pagoda",
     "badgeLocation": {
       "latitude": 10.778712424351626,
       "longitude": 106.64920636645606
@@ -46,15 +51,17 @@
   },
   {
     "id": 6,
+    "title": "Independence Palace",
     "badgeLocation": {
-    "latitude": 10.777194441766415,
-    "longitude": 106.69552740085008
-  },
-  "experiencePoints": 120,
-  "imageUrl": "independancepalace"
+      "latitude": 10.777194441766415,
+      "longitude": 106.69552740085008
+    },
+    "experiencePoints": 120,
+    "imageUrl": "independancepalace"
   },
   {
     "id": 7,
+    "title": "Notre-Dame Cathedral Basilica of Saigon",
     "badgeLocation": {
       "latitude": 10.779964660905268,
       "longitude": 106.69913691248911
@@ -64,6 +71,7 @@
   },
   {
     "id": 8,
+    "title": "Le Thi Rieng Park",
     "badgeLocation": {
       "latitude": 10.784653073469686,
       "longitude": 106.66485564163061
@@ -73,6 +81,7 @@
   },
   {
     "id": 9,
+    "title": "Landmark 81",
     "badgeLocation": {
       "latitude": 10.795235585631543,
       "longitude": 106.72176785111195
@@ -82,6 +91,7 @@
   },
   {
     "id": 10,
+    "title": "Van Hanh Mall",
     "badgeLocation": {
       "latitude": 10.77081796549969,
       "longitude": 106.66962227016126
@@ -91,6 +101,7 @@
   },
   {
     "id": 11,
+    "title": "Study Melbourne Hub",
     "badgeLocation": {
       "latitude": 10.782341622949964,
       "longitude": 106.68919703947267

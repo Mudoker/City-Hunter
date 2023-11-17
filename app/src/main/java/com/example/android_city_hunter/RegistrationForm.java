@@ -107,7 +107,6 @@ public class RegistrationForm extends AppCompatActivity {
                     User.CURRENT_USER.setHeightInCentimeters(height);
                     User.CURRENT_USER.setWeightInKilograms(weight);
                     User.CURRENT_USER.setFirstTimeLogin(false);
-
                     fileIOManipulator.save(User.CURRENT_USER.getUsername(), User.CURRENT_USER.toString());
                     Intent intent = new Intent(this, MainActivity.class);
 

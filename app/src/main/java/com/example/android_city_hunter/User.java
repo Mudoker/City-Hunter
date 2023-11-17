@@ -38,6 +38,8 @@ public class User {
         this.username = username;
         this.password = password;
         isFirstTimeLogin = true;
+        this.badges.add(1);
+        this.badges.add(2);
     }
 
     public String getUsername() {
@@ -160,15 +162,15 @@ public class User {
     }
 
     public ArrayList<Integer> getBadges() {
-        return badges;
+        return this.badges;
     }
 
     public void setBadges(ArrayList<Integer> badges) {
         this.badges = badges;
     }
 
-    public void addBadges( int badge) {
-        this.badges.add(badge);
+    public void addBadges( int badgeId) {
+        this.badges.add(badgeId);
     }
 
     public void setCurrentPosition(Position currentPosition) {

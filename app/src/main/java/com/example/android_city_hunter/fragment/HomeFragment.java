@@ -56,11 +56,17 @@ public class HomeFragment extends Fragment {
         achievements = rootView.findViewById(R.id.home_achievement_group);
         achievements.setOrientation(LinearLayout.HORIZONTAL);
 
-        ArrayList<Integer> achivementList = User.CURRENT_USER.getBadges();
+        ArrayList<Integer> achievementList = User.CURRENT_USER.getBadges();
 
-        for (int i = 0; i < achivementList.size(); i++) {
+        for (int i = 0; i < achievementList.size(); i++) {
             ImageView badge = new ImageView(rootView.getContext());
-            int achievementId = achivementList.get(i);
+            int widthInPx = rootView.getContext().getResources().getDimensionPixelSize(R.dimen.badgeView_width);
+            int heightInPx = rootView.getContext().getResources().getDimensionPixelSize(R.dimen.badgeView_height);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(widthInPx, heightInPx);
+            badge.setLayoutParams(params);
+
+            int achievementId = achievementList.get(i);
 
             switch (achievementId) {
                 case 1:

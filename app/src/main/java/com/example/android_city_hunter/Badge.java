@@ -3,24 +3,17 @@ package com.example.android_city_hunter;
 import java.util.UUID;
 
 public class Badge {
-    private String id;
+    private int id;
+    private String title;
     private Position badgeLocation;
-    private double experiencePoints;
-
+    private int  experiencePoints;
     private String imageUrl;
 
-    public Badge(Double badgeLongitude, Double badeLatitude, double experiencePoints, String imageUrl) {
-        this.id = UUID.randomUUID().toString();
-        this.badgeLocation = new Position(badgeLongitude, badeLatitude);
-        this.experiencePoints = experiencePoints;
-        this.imageUrl = imageUrl;
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -36,7 +29,7 @@ public class Badge {
         return experiencePoints;
     }
 
-    public void setExperiencePoints(double experiencePoints) {
+    public void setExperiencePoints(int experiencePoints) {
         this.experiencePoints = experiencePoints;
     }
 
@@ -48,4 +41,7 @@ public class Badge {
         this.imageUrl = imageUrl;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
 }

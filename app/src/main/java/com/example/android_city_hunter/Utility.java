@@ -52,7 +52,6 @@ public class Utility {
         // Calculate BMI
         double bmi = weightInKg / (heightInMeters * heightInMeters);
 
-//        // Format the result to one decimal place
         DecimalFormat df = new DecimalFormat("#.#");
 
         return Double.parseDouble(df.format(bmi).replace(",", "."));
