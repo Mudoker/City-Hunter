@@ -1,6 +1,5 @@
 package com.example.android_city_hunter;
 
-import java.nio.DoubleBuffer;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
@@ -8,6 +7,9 @@ public class Utility {
 
     // SingleTon
     private static final Utility UtilityInstance = new Utility();
+    static DecimalFormat df = new DecimalFormat("#.#");
+
+    private static final double AVERAGE_STRIDE_LENGTH_MALE = 0.78;
 
     private Utility() {
     }
@@ -26,7 +28,7 @@ public class Utility {
         // Adjust for age (optional)
         caloriesBurned *= ageFactor(age, isMale, weightKg, heightCm);
 
-        return caloriesBurned;
+        return Double.parseDouble(df.format(caloriesBurned).replace(",", "."));
     }
 
     private static double calculateBMR(int age, boolean isMale, double weightKg, double heightCm) {
@@ -52,20 +54,21 @@ public class Utility {
         // Calculate BMI
         double bmi = weightInKg / (heightInMeters * heightInMeters);
 
-        DecimalFormat df = new DecimalFormat("#.#");
-
         return Double.parseDouble(df.format(bmi).replace(",", "."));
     }
 
-    public static boolean updateUserExperience(double exp, User user) {
+    public static void updateUserExperience(double exp, User user) {
         double currentExp = 0;
         currentExp += user.getExperience() + exp;
 
         user.setExperience(currentExp);
 
-        // +1 level for every 50 exp
-        user.setLevel((int) (currentExp % 50));
-        return true;
+        if (currentExp <= 50) {
+            user.setLevel(1);
+        } else {
+            // +1 level for every 50 exp
+            user.setLevel((int) (currentExp % 50));
+        }
     }
 
     public static String convertLevelToTitle(int level) {
@@ -78,5 +81,8 @@ public class Utility {
         } else {
             return "Professional";
         }
+    }
+    public static double calculateDistance(int numberOfSteps) {
+        return Double.parseDouble(df.format(numberOfSteps * AVERAGE_STRIDE_LENGTH_MALE).replace(",", "."));
     }
 }

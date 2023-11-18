@@ -109,6 +109,7 @@ public class AuthenticationView extends AppCompatActivity {
     private User processLogin(String username, String password) {
         if (fileIOManipulator.isFileExist(username)) {
             final String retrievedData = fileIOManipulator.load(username);
+
             User currentUser = User.fromString(retrievedData);
 
             if  (currentUser.getPassword().equals(password)) {

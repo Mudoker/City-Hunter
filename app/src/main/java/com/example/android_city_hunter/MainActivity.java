@@ -1,6 +1,8 @@
 package com.example.android_city_hunter;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActivityResultLauncher<Intent> intentMaps = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         if (result != null && result.getResultCode() == RESULT_OK) {
             navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+            replaceFragment(new HomeFragment());
         }
     });
 
@@ -58,8 +61,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle listening on view navigation
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        replaceFragment(new HomeFragment());
 
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
     }

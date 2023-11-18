@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class User {
     public static User CURRENT_USER = new User();
@@ -20,14 +21,10 @@ public class User {
     private double weightInKilograms;
     private int totalSteps;
     private double totalOverallDistanceInKilometers;
-    private double totalTodayDistanceInKilometers;
-    private int totalTodaySteps;
     private double totalCaloriesBurned;
     private ArrayList<Integer> badges = new ArrayList<>();
     private int level; // User's level in the walking app
     private double experience; // User's experience points (exp)
-
-    private Position currentPosition = new Position(0,0);
 
     private Boolean isFirstTimeLogin;
 
@@ -99,12 +96,9 @@ public class User {
                 ", weightInKilograms=" + weightInKilograms +
                 ", totalSteps=" + totalSteps +
                 ", totalOverallDistanceInKilometers=" + totalOverallDistanceInKilometers +
-                ", totalTodayDistanceInKilometers=" + totalTodayDistanceInKilometers +
-                ", totalTodaySteps=" + totalTodaySteps +
                 ", totalCaloriesBurned=" + totalCaloriesBurned +
                 ", level=" + level +
                 ", experience=" + experience +
-                ", currentPosition=" + currentPosition +
                 ", isFirstTimeLogin=" + isFirstTimeLogin +
                 ", badge=" + Arrays.toString(badges.toArray());
     }
@@ -137,22 +131,6 @@ public class User {
         this.totalOverallDistanceInKilometers = totalOverallDistanceInKilometers;
     }
 
-    public double getTotalTodayDistanceInKilometers() {
-        return totalTodayDistanceInKilometers;
-    }
-
-    public void setTotalTodayDistanceInKilometers(double totalTodayDistanceInKilometers) {
-        this.totalTodayDistanceInKilometers = totalTodayDistanceInKilometers;
-    }
-
-    public int getTotalTodaySteps() {
-        return totalTodaySteps;
-    }
-
-    public void setTotalTodaySteps(int totalTodaySteps) {
-        this.totalTodaySteps = totalTodaySteps;
-    }
-
     public double getTotalCaloriesBurned() {
         return totalCaloriesBurned;
     }
@@ -173,10 +151,6 @@ public class User {
         this.badges.add(badgeId);
     }
 
-    public void setCurrentPosition(Position currentPosition) {
-        this.currentPosition = currentPosition;
-    }
-
     public int getLevel() {
         return level;
     }
@@ -191,14 +165,6 @@ public class User {
 
     public void setExperience(double experience) {
         this.experience = experience;
-    }
-
-    public Position getCurrentPosition() {
-        return currentPosition;
-    }
-
-    public void setCurrentPosition(double longitude, double latitude) {
-        this.currentPosition = new Position(longitude, latitude);
     }
 
     public Boolean getFirstTimeLogin() {
@@ -258,12 +224,6 @@ public class User {
                     case "totalOverallDistanceInKilometers":
                         user.setTotalOverallDistanceInKilometers(Double.parseDouble(value));
                         break;
-                    case "totalTodayDistanceInKilometers":
-                        user.setTotalTodayDistanceInKilometers(Double.parseDouble(value));
-                        break;
-                    case "totalTodaySteps":
-                        user.setTotalTodaySteps(Integer.parseInt(value));
-                        break;
                     case "totalCaloriesBurned":
                         user.setTotalCaloriesBurned(Double.parseDouble(value));
                         break;
@@ -273,31 +233,21 @@ public class User {
                     case "experience":
                         user.setExperience(Double.parseDouble(value));
                         break;
-                    case "currentPosition":
-                        if (!value.equals("null")) {
-                            int index = value.indexOf(",");
-                            if (index != -1 && index < value.length() - 1) {
-                                String positionValue = value.substring(index + 1); // Extracting the value part
-                                String[] positionParts = positionValue.split(", ");
-
-                                if (positionParts.length == 2) {
-                                    double longitudeValue = Double.parseDouble(positionParts[0]);
-                                    double latitudeValue = Double.parseDouble(positionParts[1]);
-                                    user.setCurrentPosition(new Position(longitudeValue, latitudeValue));
-                                }
-                            }
-                        }
-                        break;
                     case "isFirstTimeLogin":
                         user.setFirstTimeLogin(Boolean.parseBoolean(value));
                         break;
-                    case "badges":
+                    case "badge":
                         ArrayList<Integer> restoredList = new ArrayList<>();
                         String[] elements = value.substring(1, value.length() - 1).split(", ");
 
                         for (String element : elements) {
+                            if (Objects.equals(element, "")) {
+                                continue;
+                            }
                             restoredList.add(Integer.parseInt(element));
                         }
+
+                        user.setBadges(restoredList);
                         break;
                 }
             }
