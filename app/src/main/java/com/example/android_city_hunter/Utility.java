@@ -28,7 +28,7 @@ public class Utility {
         // Adjust for age (optional)
         caloriesBurned *= ageFactor(age, isMale, weightKg, heightCm);
 
-        return Double.parseDouble(df.format(caloriesBurned).replace(",", "."));
+        return Double.parseDouble(df.format(caloriesBurned / 1000.0).replace(",", "."));
     }
 
     private static double calculateBMR(int age, boolean isMale, double weightKg, double heightCm) {
@@ -66,8 +66,9 @@ public class Utility {
         if (currentExp <= 50) {
             user.setLevel(1);
         } else {
-            // +1 level for every 50 exp
-            user.setLevel((int) (currentExp % 50));
+            // Increase level by 1 for every 50 exp
+            int additionalLevels = (int) (currentExp / 50);
+            user.setLevel(1 + additionalLevels);
         }
     }
 

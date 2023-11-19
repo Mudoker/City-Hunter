@@ -1,11 +1,6 @@
 package com.example.android_city_hunter.fragment;
 
-import static android.content.Context.SENSOR_SERVICE;
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,13 +10,11 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.example.android_city_hunter.FileIOManipulator;
 import com.example.android_city_hunter.R;
 import com.example.android_city_hunter.User;
 import com.example.android_city_hunter.Utility;
@@ -62,7 +55,7 @@ public class HomeFragment extends Fragment {
         achievements = rootView.findViewById(R.id.home_achievement_group);
         achievements.setOrientation(LinearLayout.HORIZONTAL);
 
-        System.out.println("Badges: " + User.CURRENT_USER.toString());
+        System.out.println("Badges of user: " + User.CURRENT_USER.toString());
 
         ArrayList<Integer> achievementList = User.CURRENT_USER.getBadges();
 
@@ -125,7 +118,16 @@ public class HomeFragment extends Fragment {
         rank.setText(Utility.convertLevelToTitle(User.CURRENT_USER.getLevel()));
         level.setText(String.valueOf(User.CURRENT_USER.getLevel()));
         BMI.setText(String.valueOf(Utility.calculateBMI(User.CURRENT_USER.getWeightInKilograms(), User.CURRENT_USER.getHeightInCentimeters())));
-        totalSteps.setText(String.valueOf(User.CURRENT_USER.getTotalSteps()));
+
+        int userSteps = User.CURRENT_USER.getTotalSteps();
+
+        if (userSteps >= 10000) {
+            String textToDisplay = User.CURRENT_USER.getTotalSteps() / 1000 + "K";
+            totalSteps.setText( textToDisplay);
+        } else {
+            totalSteps.setText(String.valueOf(User.CURRENT_USER.getTotalSteps()));
+        }
+
         totalDistance.setText(String.valueOf(User.CURRENT_USER.getTotalOverallDistanceInKilometers()));
         caloriesBurnt.setText(String.valueOf(Utility.calculateCaloriesBurned(User.CURRENT_USER.getWeightInKilograms(), User.CURRENT_USER.getTotalSteps(), User.CURRENT_USER.getAge(), User.CURRENT_USER.getGender(), User.CURRENT_USER.getHeightInCentimeters())));
 

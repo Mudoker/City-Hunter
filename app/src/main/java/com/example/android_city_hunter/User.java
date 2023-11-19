@@ -1,11 +1,8 @@
 package com.example.android_city_hunter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class User {
@@ -35,8 +32,6 @@ public class User {
         this.username = username;
         this.password = password;
         isFirstTimeLogin = true;
-        this.badges.add(1);
-        this.badges.add(2);
     }
 
     public String getUsername() {
@@ -75,6 +70,8 @@ public class User {
         return gender;
     }
 
+    public DecimalFormat df = new DecimalFormat("#.#");
+
     public void setGender(String gender) {
         this.gender = gender;
     }
@@ -100,7 +97,7 @@ public class User {
                 ", level=" + level +
                 ", experience=" + experience +
                 ", isFirstTimeLogin=" + isFirstTimeLogin +
-                ", badge=" + Arrays.toString(badges.toArray());
+                ", badge=" + Arrays.toString(badges.toArray()).replace(",", "-");
     }
 
     public void setHeightInCentimeters(double heightInCentimeters) {
@@ -123,16 +120,20 @@ public class User {
         this.totalSteps = totalSteps;
     }
 
+    public void addTotalSteps(int totalSteps) {
+        this.totalSteps += totalSteps;
+    }
+
     public double getTotalOverallDistanceInKilometers() {
-        return totalOverallDistanceInKilometers;
+        return Double.parseDouble(df.format(totalOverallDistanceInKilometers).replace(",", "."));
     }
 
     public void setTotalOverallDistanceInKilometers(double totalOverallDistanceInKilometers) {
         this.totalOverallDistanceInKilometers = totalOverallDistanceInKilometers;
     }
 
-    public double getTotalCaloriesBurned() {
-        return totalCaloriesBurned;
+    public void addTotalOverallDistanceInKilometers(double totalOverallDistanceInKilometers) {
+        this.totalOverallDistanceInKilometers += totalOverallDistanceInKilometers;
     }
 
     public void setTotalCaloriesBurned(double totalCaloriesBurned) {
@@ -238,7 +239,11 @@ public class User {
                         break;
                     case "badge":
                         ArrayList<Integer> restoredList = new ArrayList<>();
-                        String[] elements = value.substring(1, value.length() - 1).split(", ");
+                        System.out.println("Value: " + value);
+                        if (value.isEmpty()) {
+                            break;
+                        }
+                        String[] elements = value.substring(1, value.length() - 1).split("- ");
 
                         for (String element : elements) {
                             if (Objects.equals(element, "")) {
@@ -254,4 +259,5 @@ public class User {
         }
         return user;
     }
+
 }

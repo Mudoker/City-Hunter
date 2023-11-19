@@ -1,7 +1,6 @@
 package com.example.android_city_hunter;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -9,18 +8,12 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
+
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
+
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -43,25 +36,29 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, SensorEventListener {
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private final FileIOManipulator fileIOManipulator = new FileIOManipulator(this);
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
+    private static final double AVERAGE_STRIDE_LENGTH_MALE = 0.78;
+
     private static final int CODE_REQUEST_LOCATION = 999;
     private static final long LOCATION_UPDATE_INTERVAL = 300;
 
+    private boolean isRunningMaps = true;
+
     private ArrayList<Badge> badgeLists = new ArrayList<>();
 
-    private SensorManager sensorManager;
-    private Sensor pedometer;
-
+    MapsThread thread = new MapsThread();
     Location currentUserLatLng;
     FloatingActionButton fabFinish;
+
+    float movingDistance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +67,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
-        pedometer = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-
         fabFinish = findViewById(R.id.fabFinish);
 
         fabFinish.setOnClickListener(v -> {
+            isRunningMaps = false;
             setResult(RESULT_OK);
             finish();
         });
@@ -123,7 +118,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_UPDATE_INTERVAL, 3f, userLocationListener);
         }
 
-        MapsThread thread = new MapsThread();
+        thread = new MapsThread();
         thread.start();
     }
 
@@ -153,12 +148,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         @Override
         public void run() {
-            while (true) {
+            while (isRunningMaps) {
                 try {
                     if (previousLocation.distanceTo(currentUserLatLng) == 0) {
                         continue;
                     }
+                    movingDistance = previousLocation.distanceTo(currentUserLatLng);
                     previousLocation = currentUserLatLng;
+
+                    User.CURRENT_USER.addTotalSteps((int) (movingDistance / AVERAGE_STRIDE_LENGTH_MALE));
+                    User.CURRENT_USER.addTotalOverallDistanceInKilometers(movingDistance / 1000);
 
                     runOnUiThread(() -> {
                         if (currentUserLatLng != null) {
@@ -200,20 +199,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             badgeLocation.setLongitude(badgeLatLng.longitude);
 
                             // 5 meters
-                            if (currentUserLatLng.distanceTo(badgeLocation) < 5) {
+                            if (currentUserLatLng.distanceTo(badgeLocation) < 100) {
                                 if (!User.CURRENT_USER.getBadges().contains(badge.getId())) {
                                     User.CURRENT_USER.addBadges(badge.getId());
-                                    System.out.println("User badges: " + User.CURRENT_USER.getBadges());
                                     Utility.updateUserExperience(badge.getExperiencePoints(), User.CURRENT_USER);
-                                    fileIOManipulator.save(User.CURRENT_USER.getUsername(), User.CURRENT_USER.toString());
-
-                                    String userSaved = fileIOManipulator.load(User.CURRENT_USER.getUsername());
-
-                                    System.out.println("User saved: " + userSaved);
                                     Toast.makeText(getApplicationContext(), "You have unlocked new badge", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
+
+                        fileIOManipulator.save(User.CURRENT_USER.getUsername(), User.CURRENT_USER.toString());
                     });
 
                     Thread.sleep(1000);
@@ -256,44 +251,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        pedometer = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-
-        if (pedometer == null) {
-            Toast.makeText(this, "No sensor", Toast.LENGTH_SHORT).show();
-        } else {
-            sensorManager.registerListener(this, pedometer, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-    }
-
-    @Override
-    public void onPause() {
-
-        super.onPause();
-
-        sensorManager.unregisterListener(this);
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-            int steps = (int) event.values[0];
-
-            User.CURRENT_USER.setTotalSteps(steps);
-
-            System.out.println("Steps: " + steps);
-            fileIOManipulator.save(User.CURRENT_USER.getUsername(), User.CURRENT_USER.toString());
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-
     }
 }
